@@ -7,11 +7,14 @@ const ArrowSwitcher = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setIsSwitching(true);
+      setIsSwitching(true); // Start the delay (hide arrow)
+      
       setTimeout(() => {
-        setIsLeftArrow(prev => !prev);
-        setIsSwitching(false);
+        const randomSwitch = Math.random() >= 0.5; // Generate a random boolean value
+        setIsLeftArrow(randomSwitch);
+        setIsSwitching(false); // End the delay (show new arrow)
       }, 1500);
+      
     }, 3000);
 
     return () => clearInterval(intervalId);
