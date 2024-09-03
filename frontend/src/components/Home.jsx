@@ -3,18 +3,23 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const ArrowSwitcher = () => {
   const [isLeftArrow, setIsLeftArrow] = useState(true);
+  const [isSwitching, setIsSwitching] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setIsLeftArrow(prev => !prev);
-    }, 1000);
+      setIsSwitching(true);
+      setTimeout(() => {
+        setIsLeftArrow(prev => !prev);
+        setIsSwitching(false);
+      }, 1500);
+    }, 3000);
 
     return () => clearInterval(intervalId);
   }, []);
 
   return (
     <div className="flex items-center justify-center h-screen">
-      {isLeftArrow ? (
+      {isSwitching ? null : isLeftArrow ? (
         <ArrowLeft size={48} color="blue" />
       ) : (
         <ArrowRight size={48} color="blue" />
@@ -24,3 +29,4 @@ const ArrowSwitcher = () => {
 };
 
 export default ArrowSwitcher;
+
